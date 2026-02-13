@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Munaza ❤️ Mohaiman</title>
+<style>
+    :root {
+        --primary: #5c0000;
+        --gold: #d4af37;
+    }
+
+    body {
+        margin: 0; padding: 0; font-family: 'Georgia', serif;
+        background: radial-gradient(circle at center, #2b0000 0%, #000000 100%);
+        color: white; overflow-x: hidden; text-align: center; height: 100vh;
+    }
+
+    .stars {
+        position: fixed; inset: 0;
+        background: url('https://www.transparenttextures.com/patterns/stardust.png');
+        opacity: 0.5; z-index: 0; pointer-events: none;
+    }
+
+    #passwordScreen {
+        position: fixed; inset: 0; background: #1a0000;
+        display: flex; flex-direction: column; justify-content: center;
+        align-items: center; z-index: 100;
+    }
+
+    input {
+        padding: 15px; border-radius: 10px; border: 1px solid var(--gold);
+        background: rgba(255,255,255,0.1); color: white;
+        text-align: center; width: 70%; max-width: 250px; margin-bottom: 15px; outline: none;
+    }
+
+    #unlockBtn {
+        background: var(--gold); color: black; padding: 12px 40px;
+        border-radius: 50px; border: none; font-weight: bold;
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); cursor: pointer;
+    }
+
+    #mainContent { display: none; position: relative; z-index: 5; height: 100vh; overflow-y: auto; padding-bottom: 80px; }
+
+    .timer-container {
+        margin: 20px auto; padding: 15px; background: rgba(255,255,255,0.05);
+        border-radius: 15px; width: 85%; border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    #timer { font-size: 1.2rem; color: var(--gold); font-weight: bold; }
+
+    .photo-frame {
+        width: 140px; height: 140px; margin: 40px auto -70px auto;
+        border-radius: 50%; border: 5px solid var(--gold);
+        overflow: hidden; position: relative; z-index: 10;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+    .letter {
+        display: none; background: #fffaf0; color: #333;
+        padding: 85px 25px 40px 25px; border-radius: 20px;
+        width: 85%; margin: 0 auto 30px auto; line-height: 1.8;
+        box-shadow: 0 0 40px rgba(0,0,0,0.5); animation: slideUp 1.2s ease;
+    }
+
+    @keyframes slideUp { from { opacity: 0; transform: translateY(100px); } to { opacity: 1; transform: translateY(0); } }
+
+    #kissBtn {
+        background: var(--primary); color: white; padding: 12px 30px;
+        border-radius: 50px; border: 2px solid var(--gold);
+        font-weight: bold; margin-top: 20px; cursor: pointer;
+        box-shadow: 0 0 15px rgba(92, 0, 0, 0.4);
+    }
+
+    #finalMessage {
+        display: none; position: fixed; inset: 0; 
+        background: black; z-index: 200; 
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        opacity: 0; transition: 2s; pointer-events: none;
+    }
+
+    #noBtn {
+        background: #ff3366; color: white; padding: 10px 25px;
+        border-radius: 50px; position: absolute; left: 50%; transform: translateX(-50%);
+        margin-top: 50px; z-index: 10; border: none;
+    }
+
+    .petal { position: fixed; top: -10%; animation: fall linear forwards; z-index: 1; pointer-events: none; }
+    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<audio id="romanticMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+</audio>
+
+<div id="passwordScreen">
+    <h2 style="color:var(--gold)">Our Journey 💕</h2>
+    <input type="password" id="passwordInput" placeholder="20-06-2024">
+    <button id="unlockBtn" onclick="checkPassword()">Unlock Our Memories 💖</button>
+    <p id="error" style="color:#ff3366; margin-top: 10px;"></p>
+</div>
+
+<div id="mainContent">
+    <h1 style="color:var(--gold); margin-top: 30px;">Munaza ❤️</h1>
+    
+    <div class="timer-container">
+        <p style="margin: 0; font-size: 0.7rem; opacity: 0.7;">TIME SINCE 20-06-2024</p>
+        <div id="timer">Calculating...</div>
+    </div>
+
+    <div id="btnContainer">
+        <h2 style="margin-top: 40px;">Will You Be My Valentine?</h2>
+        <button id="yesBtn" onclick="showLove()" style="background:white; color:var(--primary); padding: 15px 40px; border-radius: 50px; border:none; font-weight:bold; font-size:1.1rem; cursor:pointer;">YES 💖</button>
+        <button id="noBtn" onmouseover="moveNoBtn()" ontouchstart="moveNoBtn()">NO 😢</button>
+    </div>
+
+    <div id="loveSection" style="display:none;">
+        <div class="photo-frame">
+            <img src="https://via.placeholder.com/150" alt="Munaza">
+        </div>
+        
+        <div class="letter">
+            <h3 style="color:var(--primary); margin-top: 0;">My Dearest Munaza 💕</h3>
+            <p>From the moment you entered my life on <b>June 20th, 2024</b>, every single day has been brighter. You are my peace, my home, and my favorite person.</p>
+            <hr style="opacity: 0.2; margin: 20px 0;">
+            <p>I promise to stand by you, to support your dreams, and to love you more with every passing second.</p>
+            
+            <button id="kissBtn" onclick="finalSeal()">Seal with a Kiss 💋</button>
+            <p style="font-size: 14px; margin-top: 20px;"><b>Forever yours,<br>Mohaiman ❤️</b></p>
+        </div>
+    </div>
+</div>
+
+<div id="finalMessage">
+    <h1 style="color:var(--gold); font-size: 2rem;">I Love You Forever</h1>
+    <p style="font-style: italic;">Our story is just beginning...</p>
+    <h1 style="font-size: 3rem;">❤️</h1>
+</div>
+
+<script>
+    function updateTimer() {
+        const start = new Date("2024-06-20T00:00:00");
+        const now = new Date();
+        const diff = now - start;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / 1000 / 60) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+        document.getElementById("timer").innerHTML = `${days}d ${hours}h ${mins}m ${secs}s`;
+    }
+
+    function checkPassword(){
+        if(document.getElementById("passwordInput").value === "20-06-2024"){
+            document.getElementById("romanticMusic").play();
+            document.getElementById("passwordScreen").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+            setInterval(updateTimer, 1000);
+        } else {
+            document.getElementById("error").innerText = "Wrong date 😢";
+        }
+    }
+
+    function showLove(){
+        document.getElementById("loveSection").style.display = "block";
+        document.getElementById("btnContainer").style.display = "none";
+        setInterval(createPetal, 300);
+    }
+
+    function finalSeal() {
+        // Trigger a massive burst of petals/hearts
+        for(let i=0; i<100; i++) { setTimeout(createPetal, i * 10); }
+        
+        // Fade to black and show final message
+        const final = document.getElementById("finalMessage");
+        final.style.display = "flex";
+        setTimeout(() => {
+            final.style.opacity = "1";
+            final.style.pointerEvents = "all";
+        }, 100);
+    }
+
+    function createPetal() {
+        const p = document.createElement("div");
+        p.classList.add("petal");
+        p.innerHTML = ["🌸", "❤️", "✨", "💕", "💋"][Math.floor(Math.random()*5)];
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.fontSize = (Math.random() * 20 + 20) + "px";
+        p.style.animationDuration = (Math.random() * 2 + 2) + "s";
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 4000);
+    }
+
+    function moveNoBtn() {
+        const b = document.getElementById("noBtn");
+        b.style.position = "fixed";
+        b.style.left = Math.random() * (window.innerWidth - 80) + "px";
+        b.style.top = Math.random() * (window.innerHeight - 100) + "px";
+    }
+</script>
+</body>
+  </html>
+  
